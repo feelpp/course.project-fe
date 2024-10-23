@@ -1,0 +1,81 @@
+\documentclass[english,10pt,a4paper]{article}
+
+\usepackage{geometry}
+\geometry{top=3cm, bottom=3cm, left=3cm , right=3cm}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=cyan,
+}
+
+\title{Project Report: Solving a Poisson-type PDE using FEM in 2D}
+\author{Student Name}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\section{Introduction}
+\label{sec:introduction}
+This report presents the development of a C++ program to solve a Poisson-type partial differential equation (PDE) using the finite element method (FEM). The project is completed as part of two courses: \textit{C++ for Scientific Computing} and \textit{Project Development and Management}. The objective is to provide a practical implementation combining scientific computing with modern software development practices.
+
+\section{Mathematical Formulation}
+\label{sec:mathematical_formulation}
+The PDE we aim to solve is given by:
+\[
+-\Delta u = f \quad \text{in} \ \Omega, \quad u = g \quad \text{on} \ \Gamma
+\]
+where $\Omega \subset \mathbb{R}^2$ is the domain, and $\Gamma$ represents the boundary.
+
+\section{C++ Code Implementation}
+\label{sec:cpp_implementation}
+The code implements FEM for solving the PDE. The mesh is generated using \textsc{Gmsh}, and \textsc{Eigen} is used for solving the resulting linear system. Key components include:
+\begin{itemize}
+    \item Mesh reading and storage
+    \item Assembly of stiffness matrix and load vector
+    \item Application of boundary conditions
+    \item Solving the sparse linear system using \textsc{Eigen}
+\end{itemize}
+
+\section{Use of \textsc{Eigen} and STL Libraries}
+\label{sec:eigen_stl}
+The project makes extensive use of the \textsc{Eigen} library for linear algebra operations, particularly sparse matrix computations. The Standard Template Library (STL) is used for mesh data structures and iterative algorithms.
+
+\section{Software Engineering Practices}
+\label{sec:software_practices}
+\subsection{Version Control with GitHub}
+All code and documentation are tracked in a GitHub repository. Version control ensures proper project management, including:
+\begin{itemize}
+    \item Branching for feature development
+    \item Commit history for tracking changes
+    \item Pull requests for code reviews
+\end{itemize}
+
+\subsection{Continuous Integration (CI)}
+Continuous integration is implemented using GitHub Actions. Upon each push to the repository, the code is automatically built and tested.
+
+\subsection{Dockerization}
+A Dockerfile is included in the repository to containerize the project, allowing reproducible builds across different environments.
+
+\section{Numerical Results}
+\label{sec:numerical_results}
+Results for solving the PDE are obtained using various mesh sizes. Visualizations are generated in \textsc{ParaView}, and numerical integration is validated using quadrature formulas.
+
+\section{Project Conclusion}
+\label{sec:conclusion}
+The project successfully demonstrates the integration of scientific computing techniques with software engineering practices. The combination of C++ and project management tools allows for reproducible and efficient project execution.
+
+\section*{Appendices}
+\subsection*{Source Code}
+The source code is available at: \url{https://github.com/your-repository-link}
+
+\end{document}

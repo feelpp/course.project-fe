@@ -15,3 +15,7 @@ report.out
 report.pdf
 report.synctex.gz
 report.toc
+.DS_Store
+node_modules/
+cache/
+public/

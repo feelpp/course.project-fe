@@ -1,0 +1,42 @@
+= {project_name}
+:navtitle: home
+:page-layout: home-project
+:!numbered:
+:stem: latexmath
+
+
+== A joint project between C++ for Scientific Computing and Project Development and Management
+
+This project is part of a collaborative effort between two courses: C++
+for Scientific Computing and Project Development and Management. The
+goal is to provide students with a comprehensive learning experience
+that combines advanced C++ programming techniques with essential
+software engineering and project management practices.
+
+In the C++ for Scientific Computing component, students will focus on
+implementing a finite element method (FEM) to solve a Poisson-type
+partial differential equation (PDE) in a 2D domain. This involves
+understanding the mathematical formulation of the problem, translating
+it into efficient C++ code, and using tools such as Eigen and Gmsh for
+linear algebra and mesh generation. The project emphasizes the
+development of high-performance, well-structured, and reusable code for
+scientific applications.
+
+In the Project Development and Management course, students are
+introduced to modern development workflows and tools that are critical
+for software projects. This includes version control with GitHub,
+continuous integration and continuous deployment (CI/CD) using GitHub
+Actions, unit testing, and Docker for containerization. These practices
+ensure that the code developed is not only functionally correct but also
+maintainable, testable, and easily deployable.
+
+By combining these two courses, students are expected to gain both
+technical skills in scientific computing and proficiency in
+collaborative software development techniques. This joint project
+simulates real-world scenarios where complex technical tasks must be
+managed in parallel with software engineering practices, preparing
+students for careers in both academia and industry.
+
+This introduction emphasizes how the project benefits from the
+collaboration between the two courses and highlights the skills students
+will gain from both the technical and project management perspectives.

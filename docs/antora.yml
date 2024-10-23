@@ -1,0 +1,18 @@
+name: course-project-fe
+title: Course Project Finite Element Method
+version: ~
+start_page: index.adoc
+asciidoc:
+  attributes:
+    project_name: Course Project Finite Element Method
+    numbered: true
+    allow-uri-read: true
+    hide-uri-scheme: true
+    stem: latexmath
+    python: Python
+    cpp: C++
+    dynamic-blocks@: ''
+    page-toclevels: 3@
+nav:
+- modules/ROOT/nav.adoc
+

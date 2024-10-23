@@ -1,0 +1,72 @@
+== Reading a Mesh
+
+A mesh represents the spatial discretization of a continuous medium into simple geometric elements. In this project, we partition the domain Ω into disjoint triangles `K_e`:
+
+[latexmath]
+--
+\overline{\Omega}_h = \bigcup_{e=1}^{N_e} K_e
+--
+
+The meshes are generated using _Gmsh_, which outputs the mesh in a `.msh` file format. The mesh files provided for the project are:
+
+* `square2d_4elt.msh`: A coarse mesh of the square [0,1] × [0,1] composed of 4 triangles.
+* `square2d_M0.msh`: A mesh with 1474 triangles.
+* `square2d_M1.msh`: A mesh with 5824 triangles.
+* `square2d_M2.msh`: A mesh with 23252 triangles.
+* `square2d_perforated.msh`: A mesh with 42184 triangles and 30 circular perforations.
+
+To generate the mesh, use the following command:
+
+[source,bash]
+----
+$ gmsh -2 square2d.geo -format msh2 -o square2d.msh
+----
+
+The following shows the contents of `square2d_4elt.msh` and the corresponding visualizations:
+
+[source]
+----
+$MeshFormat
+2.2 0 8
+$EndMeshFormat
+$PhysicalNames
+2
+1 1 "Gamma"
+2 2 "Omega"
+$EndPhysicalNames
+$Nodes
+5
+1 0 0 0
+2 1 0 0
+3 1 1 0
+4 0 1 0
+5 0.5 0.5 0
+$EndNodes
+$Elements
+8
+1 1 2 1 1 4 1
+2 1 2 1 2 1 2
+3 1 2 1 3 2 3
+4 1 2 1 4 3 4
+5 2 2 2 6 1 2 5
+6 2 2 2 6 4 1 5
+7 2 2 2 6 2 3 5
+8 2 2 2 6 3 4 5
+$EndElements
+----
+
+[cols="1,1", options="header"]
+|===
+|Mesh M0 |Mesh M1
+
+|image:square2d_M0.png[square2d_M0.msh]
+|image:square2d_M1.png[square2d_M1.msh]
+|===
+
+[cols="1,1", options="header"]
+|===
+|Mesh M2 |Perforated Mesh
+
+|image:square2d_M2.png[square2d_M2.msh]
+|image:square2d_perforated.png[square2d_perforated.msh]
+|===

@@ -1,0 +1,95 @@
+
+
+== A Finite Element Solution Method
+
+In this section, we solve the PDE introduced earlier using the finite element method.
+
+=== Numerical Integration
+
+We approximate the integral of a function using quadrature formulas. For a triangle `K`, numerical quadrature is given by:
+
+[latexmath]
+++++
+\int_K f(x, y) dx dy \approx \sum_{q=1}^{p} w_q f(x_q)
+++++
+
+The cost of a quadrature formula is proportional to the number of function evaluations (`p` points). Quadrature formulas are classified by order:
+
+* **Order 1:** One integration point with coordinates stem:[(1/3, 1/3, 1/3)] and weight stem:[S].
+* **Order 2:** Three integration points, each with weight stem:[S/3].
+
+=== Approximation by Finite Lagrange Element stem:[P_1]
+
+We approximate the solution using finite Lagrange elements stem:[P_1].
+The approximation space stem:[V_h] consists of continuous functions that are affine on each triangle stem:[K_e].
+A function stem:[u_h \in V_h] is expressed as:
+
+[latexmath]
+++++
+u_h(x, y) = \sum_{i=0}^{N_p} u_i \phi_i(x, y)
+++++
+
+where stem:[u_i] is the value at node stem:[(x_i, y_i)] and \stem:[\phi_i] is the basis function.
+
+The assembly of the global matrix involves the integration of shape functions over each triangle. 
+The shape functions for a triangle stem:[K] are:
+
+[latexmath]
+++++
+\phi_1^K(x, y) = \frac{x_2 y_3 - x_3 y_2 + x (y_2 - y_3) + y (x_3 - x_2)}{2 \text{Area}(T)}
+++++
+
+=== Discrete Variational Formulation
+
+To solve the PDE, we use the following variational formulation:
+
+[latexmath]
+++++
+\text{Find } u_h \in V_{gh} \text{ such that } \int_{\Omega_h} \nabla u_h \cdot \nabla v = \int_{\Omega_h} f v, \quad \forall v \in V_{0h}
+++++
+
+where stem:[V_{0h}] is the space of functions that are zero on the boundary stem:[\Gamma], and stem:[V_{gh}] is the space of functions that satisfy the boundary condition stem:[g] on stem:[\Gamma].
+
+The system is then written as a linear system stem:[AU = F], where:
+
+* stem:[A] is the global stiffness matrix
+* stem:[U] is the vector of unknowns
+* stem:[F] is the load vector
+
+=== Assembly Algorithm
+
+The assembly of the global matrix `A` and vector `F` is performed element-wise over the mesh. Below is the algorithm to compute `A` and `F`:
+
+[source]
+----
+for e = 1 to N_e:
+    Calculate elementary matrix A_K_e
+    Calculate elementary vector F_K_e
+    for s = 1 to 3:
+        i = GlobalDof(K_e, s)
+        for t = 1 to 3:
+            j = GlobalDof(K_e, t)
+            A(i, j) += A_K_e(s, t)
+        F(i) += F_K_e(s)
+for i in I_b:
+    for j = 1 to N_p:
+        A(i, j) = 0
+    A(i, i) = 1
+    F(i) = g(x_i, y_i)
+----
+
+=== Problem Solution
+
+The linear system `AU = F` is solved using the _Eigen_ library. The matrix `A` is sparse, so we use _Eigen_'s sparse matrix functionalities. The solution vector `U` contains the finite element approximation at each node of the mesh.
+
+=== Applications
+
+We solve the PDE with a constant source term `f = 1` and homogeneous Dirichlet boundary conditions `u = 0` on `Γ`.
+
+[cols="1,1", options="header"]
+|===
+|Result on Mesh M2 |Result on Perforated Mesh
+
+|image:resultat_f1_nonperfo.png[square2d_M2.msh]
+|image:resultat_f1_perfo.png[square2d_perforated.msh]
+|===
