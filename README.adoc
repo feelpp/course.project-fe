@@ -1,0 +1,99 @@
+= {cpp} Finite Element Method Project
+:cpp: C++
+
+This repository contains the code, LaTeX files, and other resources for the {cpp} Finite Element Method (FEM) project. The project involves solving a Poisson-type partial differential equation (PDE) in a 2D domain using FEM and includes documentation and source code to guide students through the implementation, testing, and reporting process.
+
+== Repository Structure
+
+- `project.tex`: The main LaTeX file for the project, describing the objectives, methods, and overall instructions for solving the FEM problem.
+- `report.tex`: A template for the students to use when writing their project report.
+- `meshes/`: Contains various mesh files (.msh) that students will use for their FEM simulations.
+- `src/`: Contains sample {cpp} code to help students get started with FEM implementation.
+- `tex/`: Includes LaTeX macros used by `project.tex` and `report.tex`.
+- `.vscode/`: VSCode configuration for LaTeX settings, ensuring consistent formatting and build processes for LaTeX documents.
+
+== Getting Started
+
+=== Prerequisites
+
+To work on this project, you’ll need the following tools installed:
+
+{cpp} Compiler:: Ensure you have a {cpp} compiler like `g++` or `clang++`.
+Eigen Library:: https://eigen.tuxfamily.org/[Eigen] is used for linear algebra in this project.
+Gmsh:: https://gmsh.info/[Gmsh] is used for generating mesh files.
+LaTeX:: For generating project reports and reading project documentation.
+Git:: Version control for tracking your progress and submitting your project.
+VSCode with LaTeX Workshop:: Recommended editor for LaTeX. The `.vscode/` directory contains settings for this.
+
+=== Using the LaTeX Files
+
+project.tex:: This file contains detailed project instructions. Compile it with:
+[source,bash]
+----
+pdflatex project.tex
+----
+
+report.tex:: Use this template to create your project report. Customize it with your own content, results, and analysis. Compile it similarly:
+[source,bash]
+----
+pdflatex report.tex
+----
+
+NOTE: vscode has been configure to have the LaTeX workshop extension and uses latexmk to compile from the interface
+
+
+== Project Workflow
+
+=== Version Control with GitHub
+
+Repository Setup:: Clone this repository to your local machine:
+[source,bash]
+----
+git clone https://github.com/master-csmi/your_project.git
+----
+
+Branching:: Create a new branch specific branches for the issues/features/bugs
+[source,bash]
+----
+git checkout -b <the branch>
+----
+Commits:: Make commits regularly with meaningful messages:
+[source,bash]
+----
+git commit -m "Implemented FEM solver"
+----
+Pull Requests:: When ready, push your branch and open a pull request (PR) to merge changes into the `main` branch. The PR will make checks that the code compiles, executes and the tests are giving the proper results.
+
+=== Continuous Integration (CI)
+This project is set up with **GitHub Actions** to automatically compile and test your code with every push. The CI configuration file is located in `.github/workflows/`. To set up CI:
+1. Write unit tests for your FEM code.
+2. Ensure tests are automatically run with each PR by configuring GitHub Actions.
+
+=== Containerization with Docker
+To make your project easily reproducible, you have to containerize it using **Docker**. The repository can include a `Dockerfile` that compiles and runs the {cpp} code inside a Docker container:
+[source,bash]
+----
+docker build -t <> .
+docker run fem_project
+----
+NOTE: the docker image must be generated from the GitHub Action.
+
+== Documentation
+
+=== Project Overview
+The project covers the following key topics:
+- Solving Poisson-type PDEs using FEM.
+- Meshing using `Gmsh` and processing meshes in {cpp}.
+- Post-processing of results using **ParaView**.
+
+=== Report Guidelines
+Use `report.tex` to structure your project report, including:
+- A brief description of the project.
+- Explanation of the algorithms and code structures.
+- Results obtained from running your FEM solver.
+- Analysis of the results (e.g., convergence behavior, accuracy, performance).
+
+
+== License
+
+This project is licensed under the MIT License. See the `LICENSE` file for more details.
