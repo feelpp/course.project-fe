@@ -3,6 +3,8 @@
 
 This repository contains the code, LaTeX files, and other resources for the {cpp} Finite Element Method (FEM) project. The project involves solving a Poisson-type partial differential equation (PDE) in a 2D domain using FEM and includes documentation and source code to guide students through the implementation, testing, and reporting process.
 
+IMPORTANT: this file needs to be updated by the end of the project to reflect the organization, how to compile and execute your code.
+
 == Repository Structure
 
 - `project.tex`: The main LaTeX file for the project, describing the objectives, methods, and overall instructions for solving the FEM problem.
