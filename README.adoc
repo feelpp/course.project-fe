@@ -62,7 +62,9 @@ Commits:: Make commits regularly with meaningful messages:
 ----
 git commit -m "Implemented FEM solver"
 ----
-Pull Requests:: When ready, push your branch and open a pull request (PR) to merge changes into the `main` branch. The PR will make checks that the code compiles, executes and the tests are giving the proper results.
+Pull Requests:: When ready, push your branch and open a pull request (PR) to merge changes into the `main` branch. The PR will make checks that the code compiles, executes and the tests are giving the proper results. 
+
+NOTE: A special PR called `feedback` is automatically created in order to discuss your project and ask questions to  @vincentchabannes or @prudhomm.
 
 === Continuous Integration (CI)
 This project is set up with **GitHub Actions** to automatically compile and test your code with every push. The CI configuration file is located in `.github/workflows/`. To set up CI:
