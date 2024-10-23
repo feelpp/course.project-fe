@@ -798,21 +798,42 @@ The C++ course will focus on the implementation of the scientific computing algo
     \begin{tabular}{lcc}
     \toprule
     \textbf{Component}                               & \textbf{C++} & \textbf{Project} \\ \midrule
-    \textbf{C++ Code Implementation}                              & 30\%                                  & -                                           \\
-    \textbf{Mathematical Formulation and FEM}                     & 20\%                                  & 5\%                                        \\
-    \textbf{Use of \textsc{Eigen} and STL Libraries}              & 10\%                                  & -                                           \\
-    \textbf{Version Control with GitHub}                          & -                                     & 5\%                                        \\
-    \textbf{Continuous Integration (CI) using GitHub Actions}     & -                                     & 10\%                                        \\
-    \textbf{Unit Testing and Test Coverage}                       & -                                     & 5\%                                        \\
-    \textbf{Dockerization and Containerization}                   & -                                     & 10\%                                        \\
-    \textbf{Code Documentation}                                   & 10\%                                  & 5\%                                        \\
-    \textbf{Project Presentation and Overall Evaluation}          & 10\%                                  & 10\%                                        \\
-    \textbf{Final Report and Conclusion}                          & 20\%                                  & 25\%                                        \\
-    \textbf{Oral Presentation}                                    & -                                     & 25\%                                        \\
+    \textbf{C++ Code Implementation}                              & 30\%                 & -             \\
+    \textbf{Reformulation of the problem}                         & 20\%                 & 5\%          \\
+    \textbf{Use of CMake}                                         & 10\%                 & -             \\
+    \textbf{Version Control with GitHub}                          & -                    & 5\%          \\
+    \textbf{Continuous Integration (CI) using GitHub Actions}     & -                    & 10\%          \\
+    \textbf{Unit Testing and Test Coverage}                       & 5\%                  & 5\%          \\
+    \textbf{Dockerization and Containerization}                   & -                    & 10\%          \\
+    \textbf{Code Documentation}                                   & 10\%                 & 5\%          \\
+    \textbf{Project Presentation and Overall Evaluation}          & 5\%                 & 10\%          \\
+    \textbf{Final Report and Conclusion}                          & 20\%                 & 25\%          \\
+    \textbf{Oral Presentation}                                    & -                    & 25\%          \\
     \bottomrule
     \end{tabular}
     \caption{Grading distribution for the C++ for Scientific Computing and Project Development and Management courses.}
 \end{table}
+
+\subsection{General Roadmap}
+
+The following roadmap provides a general outline of the steps to be followed in the project. 
+The general steps and deadlines must be followed otherwise the project will have minus points.
+
+\begin{itemize}
+    \item \textbf{Version 0:} Reformulation and setup of the project, Nov 13
+    \item \textbf{Version 1:} Implementation of the C++ code including CI/CD Tests, CMake and Docker, Dec 20
+    \item \textbf{Version 2:} Report and oral presentation, Jan 13
+\end{itemize}
+
+It is allowed to make minor changes to the C++ code or environment(CI/CD, CMake, Docker) after Dec 20, but the main focus should be on the report and oral presentation.
+if you make major changes to the code after Dec 20, you will have minus points.
+For each version, a release should be made in the GitHub repository.
+
+The report and presentation must be writtten in latex and available in the repository. 
+The CI pipeline should not only build the code and make the tests but also build the documentation and oral presentation. 
+The Docker image should be available in GitHub Packages.
+For the oral presentation the beamer class will be used.
+You need to install the package \texttt{texlive-full} in Linux or WSL to have all the necessary packages for latex.
 
 \section*{Appendices}
 

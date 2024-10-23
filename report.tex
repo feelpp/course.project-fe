@@ -28,13 +28,15 @@
 \label{sec:introduction}
 This report presents the development of a C++ program to solve a Poisson-type partial differential equation (PDE) using the finite element method (FEM). The project is completed as part of two courses: \textit{C++ for Scientific Computing} and \textit{Project Development and Management}. The objective is to provide a practical implementation combining scientific computing with modern software development practices.
 
-\section{Mathematical Formulation}
+\section{Formulation of the problem}
 \label{sec:mathematical_formulation}
 The PDE we aim to solve is given by:
 \[
 -\Delta u = f \quad \text{in} \ \Omega, \quad u = g \quad \text{on} \ \Gamma
 \]
 where $\Omega \subset \mathbb{R}^2$ is the domain, and $\Gamma$ represents the boundary.
+
+Explain the mathematical formulation of the problem, including the meaning of each term and the boundary conditions.
 
 \section{C++ Code Implementation}
 \label{sec:cpp_implementation}
@@ -46,9 +48,12 @@ The code implements FEM for solving the PDE. The mesh is generated using \textsc
     \item Solving the sparse linear system using \textsc{Eigen}
 \end{itemize}
 
-\section{Use of \textsc{Eigen} and STL Libraries}
-\label{sec:eigen_stl}
-The project makes extensive use of the \textsc{Eigen} library for linear algebra operations, particularly sparse matrix computations. The Standard Template Library (STL) is used for mesh data structures and iterative algorithms.
+Explain the classes and functions used in the code, highlighting the key algorithms and data structures.
+
+Explain your usage of the Eigen library and STL.
+
+\section{CMake}
+
 
 \section{Software Engineering Practices}
 \label{sec:software_practices}
