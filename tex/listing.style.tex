@@ -1,0 +1,129 @@
+\usepackage{filecontents,listings,lstautogobble}
+
+\usepackage[many]{tcolorbox}
+\usepackage{xcolor}
+%\usepackage[skins,listings,breakable]{tcolorbox}
+\tcbuselibrary{listings}
+
+\usepackage{accsupp}
+%\lstset{language=c++,showspaces=false,showstringspaces=false,captionpos=t,literate={>>}{\ensuremath{>>}}1,mathescape,
+%  numbers=left,numberstyle=\color{black},stepnumber=1,tabsize=1,numbersep=-5pt,framexleftmargin=-10pt,%xleftmargin=5ex
+%}
+
+\definecolor{vertfonce}{rgb}{0.,0.5,0.}
+\definecolor{cppcommentcolor}{rgb}{0.,0.5,0.}
+\definecolor{cppstringcolor}{rgb}{0.6,0.1,0.1}
+
+\newcommand{\noncopynumber}[1]{%
+    \BeginAccSupp{method=escape,ActualText={}}%
+    #1%
+    \EndAccSupp{}%
+}
+
+%\lstset{breakindent=10pt,autobreakindent=0pt}
+\lstdefinestyle{mycppstyle}{
+  language=C++,
+  showspaces=false,showstringspaces=false,%captionpos=t,
+  literate={>>}{\ensuremath{>>}}1,mathescape,
+  numbers=left,numberstyle=\color{black},stepnumber=1,numbersep=5pt,xleftmargin=1ex,
+  numberstyle=\noncopynumber,
+  frame=none,%single,%leftline,
+  %breaklines=true,
+  %columns=fullflexible,
+  basicstyle=\scriptsize\bf\ttfamily,% \footnotesize\bf\ttfamily,
+  %autogobble=true,
+  %gobble=8,
+  stringstyle=\color{cppstringcolor},%
+  keywordstyle=\color{blue},
+  commentstyle=\ttfamily\color{cppcommentcolor},
+  literate={é}{{\'e}}1  {è}{{\`e}}1 {à}{{\`a}}1
+  %inputencoding=latin1,
+  %extendedchars=true,% permet d'avoir des accents dans le code
+  %caption={C++ code using listing}
+  %tabsize=2
+}
+
+\lstdefinestyle{mycppstyletiny}{
+  language=C++,
+  showspaces=false,showstringspaces=false,%captionpos=t,
+  literate={>>}{\ensuremath{>>}}1,mathescape,
+  numbers=left,numberstyle=\color{black},stepnumber=1,numbersep=5pt,xleftmargin=1ex,
+  numberstyle=\noncopynumber,
+  frame=none,%single,%leftline,
+  basicstyle=\tiny\bf\ttfamily,% \footnotesize\bf\ttfamily,
+  %autogobble=true,
+  %gobble=8,
+  stringstyle=\color{cppstringcolor},%
+  keywordstyle=\color{blue},
+  commentstyle=\ttfamily\color{cppcommentcolor},
+  literate={é}{{\'e}}1  {è}{{\`e}}1 {à}{{\`a}}1
+  %inputencoding=latin1,
+  %extendedchars=true,% permet d'avoir des accents dans le code
+  %caption={C++ code using listing}
+  %tabsize=2
+}
+
+\newtcblisting{mycpplisting}[2][]{
+    arc=0pt, outer arc=0pt,
+    listing only,
+    colback=blue!10,
+    colbacktitle=blue!75!black,top=0mm,bottom=0mm,boxsep=0mm,middle=0mm,boxrule=0.1pt,
+    enhanced,%left=15.5pt,
+    listing remove caption=false,
+    overlay={
+      \fill[gray!30]
+      ([xshift=-0pt]frame.south west)
+      rectangle
+      ([xshift=13.5pt]frame.north west);
+    },
+    listing style=mycppstyle,
+    title=#2,
+    #1
+}
+\newtcbinputlisting{mycpplistingFromFile}[3][]{
+    arc=0pt, outer arc=0pt,
+      listing file={#2},
+    listing only,
+    colback=blue!10,
+    colbacktitle=blue!75!black,top=0mm,bottom=0mm,boxsep=0mm,middle=0mm,boxrule=0.1pt,
+    enhanced,%left=15.5pt,
+    listing remove caption=false,
+    overlay={
+      \fill[gray!30]
+      ([xshift=-0pt]frame.south west)
+      rectangle
+      ([xshift=13.5pt]frame.north west);
+    },
+    listing style=mycppstyle,
+    title=#3,
+    #1
+}
+
+
+
+\lstdefinestyle{mysyntaxstyle}{
+  basicstyle=\scriptsize\bf\ttfamily
+}
+
+
+\newcommand{\mycpptext}[1]{{\ttfamily\bf{#1}}} %  {\ensuremath{\mathbb{P}_{#1}\mathbb{P}_{#2}\mathbb{G}_{#3}}\xspace}
+
+
+
+\definecolor{shellpromptcolor}{rgb}{0.,0.5,1}
+
+\newtcblisting{commandshell}{
+  colback=black,colupper=white,colframe=yellow!75!black,
+  listing only,%size=fbox,%minimal,
+  listing options={
+    style=tcblatex,
+    basicstyle=\linespread{1.1}\normalfont\ttfamily\footnotesize\color{white},
+    language=sh,backgroundcolor=\color{black},
+    %numbers=left,numberstyle=\color{white},
+    %escapeinside     = {/*@}{@*/}, % Allow LaTeX inside these special comments
+    %  mathescape,
+    escapechar={@+},
+    literate={\$prompt\$}{{\normalfont\footnotesize\textcolor{shellpromptcolor}{user \$}}}1 {é}{{\'e}}1  {è}{{\`e}}1 {à}{{\`a}}1
+  },
+  %every listing line={\textcolor{red}{\small\ttfamily\bfseries \$> }}
+}
