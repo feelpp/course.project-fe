@@ -14,7 +14,14 @@
 \usepackage{multicol}
 
 \usepackage{wrapfig}
-
+\usepackage{booktabs}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
 %
 %\usepackage{algorithm}
 %+\usepackage{algorithmic}
@@ -73,7 +80,25 @@
 \date{}
 
 \begin{document}
+
 \maketitle
+\tableofcontents
+
+
+\section*{A joint project between C++ for Scientific Computing and Project Development and Management}
+
+This project is part of a collaborative effort between two courses: C++ for Scientific Computing and Project Development and Management. The goal is to provide students with a comprehensive learning experience that combines advanced C++ programming techniques with essential software engineering and project management practices.
+
+In the C++ for Scientific Computing component, students will focus on implementing a finite element method (FEM) to solve a Poisson-type partial differential equation (PDE) in a 2D domain. This involves understanding the mathematical formulation of the problem, translating it into efficient C++ code, and using tools such as \textsc{Eigen} and \textsc{Gmsh} for linear algebra and mesh generation. The project emphasizes the development of high-performance, well-structured, and reusable code for scientific applications.
+
+In the Project Development and Management course, students are introduced to modern development workflows and tools that are critical for software projects. This includes version control with GitHub, continuous integration and continuous deployment (CI/CD) using GitHub Actions, unit testing, and Docker for containerization. These practices ensure that the code developed is not only functionally correct but also maintainable, testable, and easily deployable.
+
+By combining these two courses, students are expected to gain both technical skills in scientific computing and proficiency in collaborative software development techniques. This joint project simulates real-world scenarios where complex technical tasks must be managed in parallel with software engineering practices, preparing students for careers in both academia and industry.
+
+This introduction emphasizes how the project benefits from the collaboration between the two courses and highlights the skills students will gain from both the technical and project management perspectives.
+
+\section{Introduction}
+
 The origins of the finite element method date back to the 1950s
 when engineers used it to simulate problems in the mechanics
 of continuous deformable media. Since then, the field of applications has expanded
@@ -175,7 +200,11 @@ Several mesh files (.msh) are provided:
 \paragraph{Notes:} We're going to use version 2 of the msh format, which is quite old but easier to load than the latest versions. The meshes supplied have been generated
 square2d.geo and square\_perforated.geo files. The characteristic mesh size is defined by the h parameter at the beginning of the .geo file.
 To generate a mesh from a .geo file, either open the software and export it in msh Version 2 ASCII format, or
-command line: gmsh -2 square2d.geo -format msh2 -o square2d.msh
+command line: 
+% write commande line
+\begin{lstlisting}[language=bash]
+$ gmsh -2 square2d.geo -format msh2 -o square2d.msh
+\end{lstlisting}
 
 \paragraph{}
 To describe this file format, we'll consider the square2d\_4elt.msh file whose contents are shown below.
@@ -284,7 +313,7 @@ The area of triangle $T$ is then given by the following relationship:
 
 
 
-\section{Post-treatments}
+\section{Post-Processing}
 
 In this second section, we want to perform the following two post-processing operations:
 \begin{enumerate}
@@ -702,8 +731,10 @@ These visualizations were produced with \textsc{ParaView} using the \textit{Rain
 
 Convergence of the TODO approximate solution
 
+\section{C++ Project}
 
-\subsection{Project objectives}
+\subsection{C++ Course Objectives: C++, STL, Eigen and CMake}
+
 The objectives of the project are to implement one or more C++ programs to handle the 3 parts described above.
 The quality of the C++ code, the choice of data structures, the efficiency of the program and the annotations used to make the code easier to understand will be evaluated.
 The program(s) must be parameterizable, in the sense that results can be obtained according to parameters given by the user.
@@ -717,6 +748,71 @@ the choice of data structures, the structure of the code, any mathematical or ot
 \paragraph{}
 As far as C++ programming is concerned, you are free to use any functionality of the STL or the \textsc{Eigen} library. Any other external library will not be authorized.
 
+
+\subsection{Project Course Objectives: Version Control, CI/CD, and Docker}
+
+In addition to the scientific computing objectives of the project, this course includes essential software engineering practices related to modern development workflows. Students are expected to apply version control, continuous integration, testing, and containerization in their C++ projects. The following tasks are part of the project:
+
+\paragraph{1. Version Control with GitHub:}
+All project development should take place in a GitHub repository. The following aspects are required:
+\begin{itemize}
+\item Repository setup: Create a public or private GitHub repository for your project.
+\item Branching: Use branches for different features or parts of the project. The main branch should always contain stable and functional code.
+\item Commits and Pull Requests: Follow best practices for commit messages and use pull requests (PRs) to merge changes into the main branch. PRs should be peer-reviewed by other students.
+\item Collaborative Development: If working in teams, ensure that all members contribute to the repository using branches, commits, and PRs.
+\end{itemize}
+
+\paragraph{2. Continuous Integration with GitHub Actions:}
+Implement continuous integration (CI) to automatically build, test, and verify the integrity of the code whenever changes are pushed to the repository. The CI setup must include:
+\begin{itemize}
+\item GitHub Actions Workflow: Set up a GitHub Actions workflow to automatically compile your C++ code and run unit tests upon each commit or pull request.
+\item Automated Testing: Write unit tests to validate your code. These tests should be run automatically as part of the CI pipeline. Aim for code coverage across important project components.
+\item Code Linting (Optional): Integrate static code analysis tools like cppcheck to ensure code quality, readability, and adherence to C++ best practices.
+\end{itemize}
+
+\paragraph{3. Containerization with Docker:}
+To ensure reproducibility and ease of use, a Docker image should be generated automatically from your project. This Docker setup must:
+\begin{itemize}
+\item Dockerfile: Write a Dockerfile that compiles the C++ code and includes any dependencies required to run the program.
+\item Automated Build: Use GitHub Actions to automate the creation of the Docker image on every successful CI pipeline run. The Docker image should be available in GitHub Packages or Docker Hub.
+\item Running the Project in Docker: The final Docker image should allow users to run your program with minimal setup, making it simple to execute and reproduce the project’s results.
+\end{itemize}
+
+\paragraph{4. Documentation:}
+Ensure that the repository is well-documented:
+\begin{itemize}
+\item README: Provide a README.md file that explains how to clone the repository, install dependencies, run the project, and build the Docker image.
+\item Contribution Guidelines: Include guidelines for contributing to the project, especially if it is a team project.
+\item Documentation for Code and Workflow: Clearly document the CI pipeline, testing strategy, and Docker setup. Consider adding links to relevant GitHub Actions, test reports, and Docker images.
+\end{itemize}
+
+This section integrates best practices from software engineering and DevOps, which are crucial for developing maintainable and reproducible scientific computing projects.
+
+\subsection{Grading}
+
+The following table shows the grading distribution for the C++ for Scientific Computing and Project courses. 
+The C++ course will focus on the implementation of the scientific computing algorithms, while the Project course will evaluate the project management aspects, including version control, CI/CD, and Docker.
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{lcc}
+    \toprule
+    \textbf{Component}                               & \textbf{C++} & \textbf{Project} \\ \midrule
+    \textbf{C++ Code Implementation}                              & 30\%                                  & -                                           \\
+    \textbf{Mathematical Formulation and FEM}                     & 20\%                                  & 5\%                                        \\
+    \textbf{Use of \textsc{Eigen} and STL Libraries}              & 10\%                                  & -                                           \\
+    \textbf{Version Control with GitHub}                          & -                                     & 5\%                                        \\
+    \textbf{Continuous Integration (CI) using GitHub Actions}     & -                                     & 10\%                                        \\
+    \textbf{Unit Testing and Test Coverage}                       & -                                     & 5\%                                        \\
+    \textbf{Dockerization and Containerization}                   & -                                     & 10\%                                        \\
+    \textbf{Code Documentation}                                   & 10\%                                  & 5\%                                        \\
+    \textbf{Project Presentation and Overall Evaluation}          & 10\%                                  & 10\%                                        \\
+    \textbf{Final Report and Conclusion}                          & 20\%                                  & 25\%                                        \\
+    \textbf{Oral Presentation}                                    & -                                     & 25\%                                        \\
+    \bottomrule
+    \end{tabular}
+    \caption{Grading distribution for the C++ for Scientific Computing and Project Development and Management courses.}
+\end{table}
 
 \section*{Appendices}
 
