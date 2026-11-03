@@ -1,4 +1,4 @@
-\usepackage{filecontents,listings,lstautogobble}
+\usepackage{listings,lstautogobble}
 
 \usepackage[many]{tcolorbox}
 \usepackage{xcolor}
@@ -6,7 +6,7 @@
 \tcbuselibrary{listings}
 
 \usepackage{accsupp}
-%\lstset{language=c++,showspaces=false,showstringspaces=false,captionpos=t,literate={>>}{\ensuremath{>>}}1,mathescape,
+%\lstset{language=c++,showspaces=false,showstringspaces=false,breaklines=true,columns=fullflexible,keepspaces=true,captionpos=t,literate={>>}{\ensuremath{>>}}1,mathescape,
 %  numbers=left,numberstyle=\color{black},stepnumber=1,tabsize=1,numbersep=-5pt,framexleftmargin=-10pt,%xleftmargin=5ex
 %}
 
@@ -23,18 +23,18 @@
 %\lstset{breakindent=10pt,autobreakindent=0pt}
 \lstdefinestyle{mycppstyle}{
   language=C++,
-  showspaces=false,showstringspaces=false,%captionpos=t,
+  showspaces=false,showstringspaces=false,breaklines=true,columns=fullflexible,keepspaces=true,%captionpos=t,
   literate={>>}{\ensuremath{>>}}1,mathescape,
   numbers=left,numberstyle=\color{black},stepnumber=1,numbersep=5pt,xleftmargin=1ex,
   numberstyle=\noncopynumber,
   frame=none,%single,%leftline,
   %breaklines=true,
   %columns=fullflexible,
-  basicstyle=\scriptsize\bf\ttfamily,% \footnotesize\bf\ttfamily,
+  basicstyle=\footnotesize\ttfamily,% \footnotesize\bf\ttfamily,
   %autogobble=true,
   %gobble=8,
   stringstyle=\color{cppstringcolor},%
-  keywordstyle=\color{blue},
+  keywordstyle=\color{CSMITeal},
   commentstyle=\ttfamily\color{cppcommentcolor},
   literate={é}{{\'e}}1  {è}{{\`e}}1 {à}{{\`a}}1
   %inputencoding=latin1,
@@ -45,16 +45,16 @@
 
 \lstdefinestyle{mycppstyletiny}{
   language=C++,
-  showspaces=false,showstringspaces=false,%captionpos=t,
+  showspaces=false,showstringspaces=false,breaklines=true,columns=fullflexible,keepspaces=true,%captionpos=t,
   literate={>>}{\ensuremath{>>}}1,mathescape,
   numbers=left,numberstyle=\color{black},stepnumber=1,numbersep=5pt,xleftmargin=1ex,
   numberstyle=\noncopynumber,
   frame=none,%single,%leftline,
-  basicstyle=\tiny\bf\ttfamily,% \footnotesize\bf\ttfamily,
+  basicstyle=\scriptsize\ttfamily,% \footnotesize\bf\ttfamily,
   %autogobble=true,
   %gobble=8,
   stringstyle=\color{cppstringcolor},%
-  keywordstyle=\color{blue},
+  keywordstyle=\color{CSMITeal},
   commentstyle=\ttfamily\color{cppcommentcolor},
   literate={é}{{\'e}}1  {è}{{\`e}}1 {à}{{\`a}}1
   %inputencoding=latin1,
@@ -66,9 +66,9 @@
 \newtcblisting{mycpplisting}[2][]{
     arc=0pt, outer arc=0pt,
     listing only,
-    colback=blue!10,
-    colbacktitle=blue!75!black,top=0mm,bottom=0mm,boxsep=0mm,middle=0mm,boxrule=0.1pt,
-    enhanced,%left=15.5pt,
+    colback=CSMILight,
+    colbacktitle=CSMINavy,top=0mm,bottom=0mm,boxsep=0mm,middle=0mm,boxrule=0.1pt,
+    enhanced,breakable,%left=15.5pt,
     listing remove caption=false,
     overlay={
       \fill[gray!30]
@@ -80,13 +80,13 @@
     title=#2,
     #1
 }
-\newtcbinputlisting{mycpplistingFromFile}[3][]{
+\newtcbinputlisting{\mycpplistingFromFile}[3][]{
     arc=0pt, outer arc=0pt,
       listing file={#2},
     listing only,
-    colback=blue!10,
-    colbacktitle=blue!75!black,top=0mm,bottom=0mm,boxsep=0mm,middle=0mm,boxrule=0.1pt,
-    enhanced,%left=15.5pt,
+    colback=CSMILight,
+    colbacktitle=CSMINavy,top=0mm,bottom=0mm,boxsep=0mm,middle=0mm,boxrule=0.1pt,
+    enhanced,breakable,%left=15.5pt,
     listing remove caption=false,
     overlay={
       \fill[gray!30]
@@ -102,7 +102,7 @@
 
 
 \lstdefinestyle{mysyntaxstyle}{
-  basicstyle=\scriptsize\bf\ttfamily
+  basicstyle=\footnotesize\ttfamily
 }
 
 
@@ -113,7 +113,7 @@
 \definecolor{shellpromptcolor}{rgb}{0.,0.5,1}
 
 \newtcblisting{commandshell}{
-  colback=black,colupper=white,colframe=yellow!75!black,
+  colback=black,colupper=white,colframe=CSMITeal,
   listing only,%size=fbox,%minimal,
   listing options={
     style=tcblatex,

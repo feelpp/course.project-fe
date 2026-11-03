@@ -1,28 +1,24 @@
-\documentclass[english,10pt,a4paper]{article}
+\documentclass[11pt,a4paper]{article}
+\usepackage{tex/csmi}
+\renewcommand{\CSMIdoctype}{PROJECT REPORT}
+\renewcommand{\CSMIshorttitle}{FEM / Project report}
+\renewcommand{\CSMIcovernote}{Replace the guidance in this template with specific examples from your own work: design decisions, numerical validation and a reproducible software workflow.}
 
-\usepackage{geometry}
-\geometry{top=3cm, bottom=3cm, left=3cm , right=3cm}
-\usepackage[utf8x]{inputenc}
-\usepackage{amsmath, amssymb}
-\usepackage{graphicx}
-\usepackage{booktabs}
-\usepackage{hyperref}
-\hypersetup{
-    colorlinks=true,
-    linkcolor=blue,
-    filecolor=magenta,
-    urlcolor=cyan,
-}
-
-\title{Project Report: Solving a Poisson-type PDE using FEM in 2D}
-\author{Student Name}
+\title{Finite element methods\\in two dimensions}
+\author{Student name / Individual submission}
 \date{\today}
 
 \begin{document}
 
 \maketitle
 
+\begin{csminote}[Before submitting]
+Identify the delivered commit and image, check that every reported result can be
+reproduced, and complete the AI assistance declaration. This is an individual
+report: explain your own design decisions and validation work.
+\end{csminote}
 \tableofcontents
+\clearpage
 
 \section{Introduction}
 \label{sec:introduction}
@@ -53,6 +49,11 @@ Explain the classes and functions used in the code, highlighting the key algorit
 Explain your usage of the Eigen library and STL.
 
 \section{CMake}
+\begin{csminote}[Build and verification]
+Document the minimum CMake version, compiler, C++ standard and Eigen dependency.
+Give the exact configure, build and CTest commands for a clean checkout.
+Explain your targets and how dependencies propagate between them.
+\end{csminote}
 
 
 \section{Software Engineering Practices}
@@ -62,22 +63,32 @@ All code and documentation are tracked in a GitHub repository. Version control e
 \begin{itemize}
     \item Branching for feature development
     \item Commit history for tracking changes
-    \item Pull requests for code reviews
+    \item Pull requests for self-review, test results and instructor feedback
 \end{itemize}
 
 \subsection{Continuous Integration (CI)}
-Continuous integration is implemented using GitHub Actions. Upon each push to the repository, the code is automatically built and tested.
+Describe the GitHub Actions workflow you implemented, its triggers, jobs, tests and failure handling. Link a successful run and a failure you diagnosed.
 
 \subsection{Dockerization}
-A Dockerfile is included in the repository to containerize the project, allowing reproducible builds across different environments.
+Describe your Dockerfile, dependencies, build/run commands, input/output mounts and the published image tag or digest. Explain how you verified a run in the container.
 
 \section{Numerical Results}
 \label{sec:numerical_results}
 Results for solving the PDE are obtained using various mesh sizes. Visualizations are generated in \textsc{ParaView}, and numerical integration is validated using quadrature formulas.
 
+\section{Reproducibility and development record}
+Provide the release tag and commit, compiler and dependency versions, exact build/test/run commands, input files, expected results and numerical tolerances.
+Record a reproduction from a clean checkout. Link representative issues, pull requests, reviews and CI runs; explain your own decisions and how instructor feedback was addressed.
+
+\section{AI assistance disclosure}
+Follow the CSMI policy: \url{https://csmi.cemosis.fr/fr/csmi/ai-policy.html}.
+Declare either no use or the tools actually used, provider, model/version (or explicitly unavailable), access dates, purpose and affected files/sections.
+Summarise the prompts, accepted/adapted/rejected suggestions and independent validation; link the incremental journal in \texttt{AI-DISCLOSURE.adoc}.
+Cite the tools with software bibliographic entries and access dates, and cite original sources for technical and scientific claims. Do not include confidential prompts or data.
+
 \section{Project Conclusion}
 \label{sec:conclusion}
-The project successfully demonstrates the integration of scientific computing techniques with software engineering practices. The combination of C++ and project management tools allows for reproducible and efficient project execution.
+Describe the objectives actually achieved, validation results, limitations and remaining work. Do not claim success without validation.
 
 \section*{Appendices}
 \subsection*{Source Code}

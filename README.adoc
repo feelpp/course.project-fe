@@ -3,7 +3,21 @@
 
 This repository contains the code, LaTeX files, and other resources for the {cpp} Finite Element Method (FEM) project. The project involves solving a Poisson-type partial differential equation (PDE) in a 2D domain using FEM and includes documentation and source code to guide students through the implementation, testing, and reporting process.
 
-IMPORTANT: this file needs to be updated by the end of the project to reflect the organization, how to compile and execute your code.
+IMPORTANT: Update this file by the end of the project to describe your repository structure and the exact commands needed to build, test, and run your code.
+
+== Template Status and Course Guidelines
+
+This is an individual project: each student maintains their own repository, report, and AI usage journal.
+
+This repository provides the scientific project brief, meshes, two {cpp} examples, and a report template.
+*Students must implement the CMake build, tests, CI, and Docker setup*; these are not preconfigured.
+Creating a repository from this template does not automatically configure branch protection, permissions, or GitHub Classroom.
+
+* link:EVALUATION.adoc[Proposed Project Course Rubric and Required Deliverables] — subject to instructor approval before distribution.
+* link:AI-USAGE.adoc[AI Usage and Full Disclosure], based on the referenced CSMI AI policy.
+* link:AI-DISCLOSURE.adoc[AI Disclosure Statement and Journal to Be Completed by Students].
+
+The dates and grading weights in `project.tex` are historical. Instructors will confirm the requirements for the new cohort.
 
 == Repository Structure
 
@@ -27,21 +41,26 @@ LaTeX:: For generating project reports and reading project documentation.
 Git:: Version control for tracking your progress and submitting your project.
 VSCode with LaTeX Workshop:: Recommended editor for LaTeX. The `.vscode/` directory contains settings for this.
 
+=== Shared Style and Compilation
+
+The project brief and report share the `tex/csmi.sty` style (cover page, typography, colors, and callout boxes). See the link:tex/README.adoc[style documentation] for customization instructions.
+The `.latexmkrc` configuration places generated PDFs in `output/pdf/`. Students must configure their CI to retain these PDFs as artifacts.
+
 === Using the LaTeX Files
 
 project.tex:: This file contains detailed project instructions. Compile it with:
 [source,bash]
 ----
-pdflatex project.tex
+latexmk -pdf -interaction=nonstopmode -halt-on-error project.tex
 ----
 
 report.tex:: Use this template to create your project report. Customize it with your own content, results, and analysis. Compile it similarly:
 [source,bash]
 ----
-pdflatex report.tex
+latexmk -pdf -interaction=nonstopmode -halt-on-error report.tex
 ----
 
-NOTE: vscode has been configure to have the LaTeX workshop extension and uses latexmk to compile from the interface
+NOTE: The VSCode settings provide LaTeX Workshop recipes that use `latexmk` to compile documents from the editor.
 
 
 == Project Workflow
@@ -51,25 +70,27 @@ NOTE: vscode has been configure to have the LaTeX workshop extension and uses la
 Repository Setup:: Clone this repository to your local machine:
 [source,bash]
 ----
-git clone https://github.com/master-csmi/your_project.git
+git clone <YOUR_INDIVIDUAL_REPOSITORY_URL>
+cd <REPOSITORY_NAME>
 ----
 
-Branching:: Create a new branch specific branches for the issues/features/bugs
+Branching:: Create a separate branch for each issue, feature, or bug fix:
 [source,bash]
 ----
-git checkout -b <the branch>
+git checkout -b <BRANCH_NAME>
 ----
 Commits:: Make commits regularly with meaningful messages:
 [source,bash]
 ----
 git commit -m "Implemented FEM solver"
 ----
-Pull Requests:: When ready, push your branch and open a pull request (PR) to merge changes into the `main` branch. The PR will make checks that the code compiles, executes and the tests are giving the proper results. 
+Pull Requests:: When ready, push your branch and open a pull request (PR) to merge changes into the `main` branch. Configure your CI to check that the code builds, runs, and passes its tests on each PR. Use PRs to record self-review and instructor feedback.
 
-NOTE: A special PR called `feedback` is automatically created in order to discuss your project and ask questions to  @vincentchabannes or @prudhomm.
+NOTE: GitHub Classroom can create a `feedback` PR if instructors enable that feature. Creating a repository from this template alone does not create this PR.
 
 === Continuous Integration (CI)
-This project is set up with **GitHub Actions** to automatically compile and test your code with every push. The CI configuration file is located in `.github/workflows/`. To set up CI:
+Students must set up **GitHub Actions** to compile and test the code on pushes and pull requests. Create the configuration in `.github/workflows/`; no workflow is supplied in this starter. To set up CI:
+
 1. Write unit tests for your FEM code.
 2. Ensure tests are automatically run with each PR by configuring GitHub Actions.
 
@@ -77,10 +98,10 @@ This project is set up with **GitHub Actions** to automatically compile and test
 To make your project easily reproducible, you have to containerize it using **Docker**. The repository can include a `Dockerfile` that compiles and runs the {cpp} code inside a Docker container:
 [source,bash]
 ----
-docker build -t <> .
+docker build -t fem_project .
 docker run fem_project
 ----
-NOTE: the docker image must be generated from the GitHub Action.
+NOTE: The Docker image must be built by your GitHub Actions workflow.
 
 == Documentation
 
@@ -100,4 +121,4 @@ Use `report.tex` to structure your project report, including:
 
 == License
 
-This project is licensed under the MIT License. See the `LICENSE` file for more details.
+The original README stated that this project used the MIT License, but no `LICENSE` file is present. The maintainers must confirm the license and copyright holders before distributing the updated template.
