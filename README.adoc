@@ -121,4 +121,4 @@ Use `report.tex` to structure your project report, including:
 
 == License
 
-The original README stated that this project used the MIT License, but no `LICENSE` file is present. The maintainers must confirm the license and copyright holders before distributing the updated template.
+This project is licensed under the link:LICENSE[MIT License].
