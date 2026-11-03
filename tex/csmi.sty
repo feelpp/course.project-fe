@@ -7,7 +7,12 @@
 \RequirePackage[english]{babel}
 \RequirePackage{amsmath,amssymb}
 \RequirePackage{newtxtext,newtxmath}
-\RequirePackage[scaled=0.94]{sourcesans}
+% Support both recent TeX Live and Ubuntu 24.04's package name.
+\IfFileExists{sourcesans.sty}{%
+  \RequirePackage[scaled=0.94]{sourcesans}%
+}{%
+  \RequirePackage[scaled=0.94]{sourcesanspro}%
+}
 \RequirePackage[scaled=0.92]{inconsolata}
 \RequirePackage{microtype}
 \RequirePackage[a4paper,margin=24mm,top=25mm,bottom=25mm,headheight=15pt,headsep=9mm]{geometry}
