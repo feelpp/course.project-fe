@@ -1,88 +1,41 @@
-\documentclass[english,10pt,a4paper]{article}
-
-\usepackage{geometry}
-\geometry{top=3cm, bottom=3cm, left=3cm , right=3cm}
-
-\usepackage[utf8x]{inputenc}
-\usepackage[french]{babel}
-\usepackage{hyperref}
-
-\usepackage{amsmath,amssymb,calc}
-\usepackage{pgfplots}
-\usepackage{pgfplotstable}
-\usepackage{multirow,booktabs,subcaption}
-\usepackage{multicol}
-
-\usepackage{wrapfig}
-\usepackage{booktabs}
-\usepackage{hyperref}
-\hypersetup{
-    colorlinks=true,
-    linkcolor=blue,
-    filecolor=magenta,      
-    urlcolor=cyan,
-}
-%
-%\usepackage{algorithm}
-%+\usepackage{algorithmic}
-%usepackage{algorithmicx}
+\documentclass[11pt,a4paper]{article}
+\usepackage{tex/csmi}
+\usepackage{calc,pgfplots,pgfplotstable,multirow,subcaption,wrapfig}
+\pgfplotsset{compat=1.18}
 
 \input{tex/listing.style}
 \input{tex/algorithm.style}
 
 \lstdefinestyle{mycppstyleInTabular}{
-  language=C++,
-  showspaces=false,showstringspaces=false,%captionpos=t,
-  literate={>>}{athensure{>>}}1,mathescape,
-  %numbers=left,
-  numberstyle=\color{black},stepnumber=1,numbersep=5pt,xleftmargin=1ex,
-  %frame=none,%single,%leftline,
-  basicstyle=\scriptsize\bf\ttfamily,% \footnotesize\bf\ttfamily,
-  %autogobble=true,
-  %gobble=8,
-  stringstyle=\color{cppstringcolor},%
-  keywordstyle=\color{blue},
-  commentstyle=\ttfamily\color{cppcommentcolor},
-  literate={é}{{\'e}}1 {è}{{\`e}}1 {à}{{\`a}}1
-  %inputencoding=latin1,
-  %extendedchars=true,% allows accents in the code
-  %caption={C++ code using listing}
-  %tabsize=2
+  style=mycppstyle,numbers=none,basicstyle=\footnotesize\ttfamily,
+  xleftmargin=0pt,mathescape=true
 }
-
 \newtcblisting{mycpplistingInTabular}[2][]{
-    arc=0pt, outer arc=0pt,
-    listing only,
-    colback=blue!10,
-    colbacktitle=blue!75!black,top=0mm,bottom=0mm,boxsep=0mm,middle=0mm,boxrule=0.1pt,
-    enhanced,%left=15.5pt,
-    listing remove caption=false,
-    overlay={
-      \fill[gray!30]
-      ([xshift=-0pt]frame.south west)
-      rectangle
-      ([xshift=13.5pt]frame.north west);
-    },
-    listing style=mycppstyleInTabular,
-    title=#2,
-    #1
+  enhanced,sharp corners,listing only,
+  colback=CSMILight,colframe=CSMIRule,boxrule=0.4pt,
+  colbacktitle=CSMINavy,coltitle=white,fonttitle=\small\sffamily\bfseries,
+  left=7pt,right=7pt,top=6pt,bottom=6pt,
+  listing style=mycppstyleInTabular,title={#2},#1
 }
-
 
 \newcommand{\dollar}{\mbox{\textdollar}}
 
-\graphicspath{
-  {../../../images/}
-  }
-
-\title{Project: Solving a partial differential equation by the finite element method in a 2d domain}
-\title{Projet C++ : Solving a Poisson-type partial differential equation using a finite element method in 2d}
+\title{Finite element methods\\in two dimensions}
+\author{Vincent Chabannes \enspace /\enspace Christophe Prud'homme}
 \date{}
 
 \begin{document}
 
 \maketitle
+\begin{csminote}[How to use this brief]
+This is an individual project shared by the C++ and Project courses.
+Read the scientific tasks first, then identify the expected software deliverables.
+The updated assessment proposal and AI disclosure instructions are in
+\path{EVALUATION.adoc} and \path{AI-USAGE.adoc}.
+Dates and assessment weights must be confirmed by the instructors.
+\end{csminote}
 \tableofcontents
+\clearpage
 
 
 \section*{A joint project between C++ for Scientific Computing and Project Development and Management}
@@ -93,9 +46,9 @@ In the C++ for Scientific Computing component, students will focus on implementi
 
 In the Project Development and Management course, students are introduced to modern development workflows and tools that are critical for software projects. This includes version control with GitHub, continuous integration and continuous deployment (CI/CD) using GitHub Actions, unit testing, and Docker for containerization. These practices ensure that the code developed is not only functionally correct but also maintainable, testable, and easily deployable.
 
-By combining these two courses, students are expected to gain both technical skills in scientific computing and proficiency in collaborative software development techniques. This joint project simulates real-world scenarios where complex technical tasks must be managed in parallel with software engineering practices, preparing students for careers in both academia and industry.
+By combining these two courses, students are expected to gain both technical skills in scientific computing and proficiency in reliable software development techniques. This joint project simulates real-world scenarios where complex technical tasks must be managed in parallel with software engineering practices, preparing students for careers in both academia and industry.
 
-This introduction emphasizes how the project benefits from the collaboration between the two courses and highlights the skills students will gain from both the technical and project management perspectives.
+
 
 \section{Introduction}
 
@@ -114,7 +67,7 @@ or finance, to name but a few. % quote finite element checklist
 In this project, we're interested in solving a Poisson-type partial differential equation (PDE) in a bounded domain $\Omega \subset \mathbb{R}^2$.
 Many physical models can be put into this form (conductive heat transfer, electrostatics, etc.).
 In addition, we add Dirichlet-type boundary conditions (imposed value of the unknown) on the edge of the domain, which we denote $\Gamma$.
-The problem is then to find a real-valued function $u$, $u : \Omega \longrightarrow \mathbb{R}^2$, which verifies the following system:
+The problem is then to find a real-valued function $u$, $u : \Omega \longrightarrow \mathbb{R}$, which verifies the following system:
 
 \begin{eqnarray}
 \left\{
@@ -164,41 +117,40 @@ Several mesh files (.msh) are provided:
 \item square2d\_perforated.msh: a mesh of square $[0,1] \times [0,1]$ with 30 circular perforations. It is composed of 42184 triangles (figure \ref{fig:mesh_square2d_perforated}).
 \end{itemize}
 
-\begin{multicols}{2}
-  \begin{figure}[H]
-  \centering
-  \includegraphics[width=0.4\textwidth]{images/square2d_M0.png}
+\begin{figure}[htbp]
+\centering
+\begin{minipage}[t]{0.47\linewidth}
+\centering
+  \includegraphics[width=0.90\linewidth]{images/square2d_M0.png}
   \caption{square2d\_M0.msh}
   \label{fig:mesh_square2d_M0}
-  \end{figure}
-  \columnbreak
-  \begin{figure}[H]
-  \centering
-  \includegraphics[width=0.4\textwidth]{images/square2d_M1.png}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.47\linewidth}
+\centering
+  \includegraphics[width=0.90\linewidth]{images/square2d_M1.png}
   \caption{square2d\_M1.msh}
   \label{fig:mesh_square2d_M1}
-  \end{figure}
-  %\columnbreak
-  \end{multicols}
-\begin{multicols}{2}
-  \begin{figure}[H]
-  \centering
-  \includegraphics[width=0.4\textwidth]{images/square2d_M2.png}
+\end{minipage}
+\end{figure}
+\begin{figure}[htbp]
+\centering
+\begin{minipage}[t]{0.47\linewidth}
+\centering
+  \includegraphics[width=0.90\linewidth]{images/square2d_M2.png}
   \caption{square2d\_M2.msh}
   \label{fig:mesh_square2d_M2}
-  \end{figure}
-  \columnbreak
-  \begin{figure}[H]
-  \centering
-  \includegraphics[width=0.4\textwidth]{images/square2d_perforated.png}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.47\linewidth}
+\centering
+  \includegraphics[width=0.90\linewidth]{images/square2d_perforated.png}
   \caption{square2d\_perforated.msh}
   \label{fig:mesh_square2d_perforated}
-  \end{figure}
-\end{multicols}
+\end{minipage}
+\end{figure}
 
 
 \paragraph{Notes:} We're going to use version 2 of the msh format, which is quite old but easier to load than the latest versions. The meshes supplied have been generated
-square2d.geo and square\_perforated.geo files. The characteristic mesh size is defined by the h parameter at the beginning of the .geo file.
+from the square2d.geo and square2d\_perforated.geo files. The characteristic mesh size is defined by the h parameter at the beginning of the .geo file.
 To generate a mesh from a .geo file, either open the software and export it in msh Version 2 ASCII format, or
 command line: 
 % write commande line
@@ -212,7 +164,7 @@ It represents the discretization of a square composed of just 4 triangles. In ad
 the boundary conditions of the PDE. The 2 figures below illustrate the mesh and the numbering of points, edge segments and triangles.
 
 \paragraph{}
-\begin{minipage}[c]{0.4\linewidth}
+\noindent\begin{minipage}[c]{0.40\linewidth}
 
 \begin{mycpplistingInTabular}{square2d\_4elt.msh}
 $\dollar$MeshFormat
@@ -245,7 +197,7 @@ $\dollar$EndElements
 \end{mycpplistingInTabular}
 
 \end{minipage} \hfill
-\begin{minipage}[c]{0.6\linewidth}
+\begin{minipage}[c]{0.56\linewidth}
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.4\textwidth]{images/square2d_4elt.png}
@@ -337,7 +289,7 @@ The first part of the file begins with a description of the format and type of d
 my example
 ASCII
 DATASET UNSTRUCTURED_GRID
-\end{mycpplistingInTabular}{}
+\end{mycpplistingInTabular}
 The first line shows the version of the VTK file format.
 The second line is a name given to the export (this name is not really important for our purposes).
 The last 2 lines specify the data type.
@@ -412,21 +364,21 @@ and a function name that will appear under \textsc{ParaView}. The saved file can
 Figures \ref{fig:mesh_square2d_M2_export} and \ref{fig:mesh_square2d_perforated_export} illustrate a visualization with \textsc{ParaView} on the mesh square2d\_M2.msh and square2d\_perforated.msh.
 
 %\newpage
-\begin{multicols}{2}
-  \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.4\textwidth]{images/square2d_M2_export.png}
+\begin{figure}[htbp]
+\centering
+\begin{minipage}[t]{0.47\linewidth}
+\centering
+    \includegraphics[width=0.90\linewidth]{images/square2d_M2_export.png}
     \caption{$f(x,y)=x^2+y^2$}
     \label{fig:mesh_square2d_M2_export}
-  \end{figure}
-  \columnbreak
-  \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.4\textwidth]{images/square2d_perforated_export.png}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.47\linewidth}
+\centering
+    \includegraphics[width=0.90\linewidth]{images/square2d_perforated_export.png}
     \caption{$f(x,y)=(x-0.5)^2+(y-0.5)^2$}
     \label{fig:mesh_square2d_perforated_export}
-  \end{figure}
-\end{multicols}
+\end{minipage}
+\end{figure}
 
 
 \subsection{Numerical integration}
@@ -507,7 +459,7 @@ However, you will have the essentials to implement this method in your program.
 In the following, we assume that we have a mesh of the $\Omega$ domain formed by $N_e$ triangles, which we denote $\Omega_h$.
 These triangles are defined using $N_p$ points (all different), denoted by the set of coordinates $\left\{ (x_i,y_i) \right\}_{i=1}^{N_p}$.
 
-\subsection{Approximation by finite Lagrange element $\mathbb{P}_1$}
+\subsection{Approximation by finite Lagrange element \texorpdfstring{$\mathbb{P}_1$}{P1}}
 
 To begin with, we need to define an approximation space for the solution of the PDE, which we'll call $V_h$.
 This will be the space of functions that are continuous on the mesh and affine on each triangle of the mesh. This is expressed by :
@@ -668,14 +620,14 @@ In our case, this will correspond to the identifier of the point in the mesh, an
 However, you need to be careful with C++ data structures (such as arrays, vectors and matrices \textsc{Eigen}). These have indices starting at zero, not 1.
 
 In addition, the second part of the algorithm (lines 13 to 19) takes into account Dirichlet-type boundary conditions. Noting $I_b$, the set of degrees of freedom at the edge,
-this method consists in modifying the $I_b$ rows of the $A$ matrix, as well as the values of the $F$ vector at the $I_b$ indices. To do this, all the entries in these rows must be set to zero, except for
+this method consists in modifying the $I_b$ rows of the $A$ matrix, as well as the values of the $F$ vector at the $I_b$ indices. To do this, all the entries in these rows must be set to zero, except for the diagonal entry, which is set to one.
 The $F$ vector is modified by setting the value defined by the boundary condition. This technique is known as the elimination method.
 
 
 \subsection{Problem solution}
 
-To solve the system $A U = F$, we need to invert the potentially large but sparse matrix $A$.
-Many techniques exist, either by explicitly calculating the inverse, or by using an iterative method.
+To solve the system $A U = F$, use a sparse direct or iterative solver.
+Do not explicitly form the inverse of $A$. Check solver status and the residual after solving.
 However, we won't be implementing such a procedure, but rather using the \textsc{Eigen} library. \href{http://eigen.tuxfamily.org/dox/}{\color{shellpromptcolor} http://eigen.tuxfamily.org/dox/}.
 It provides functionality for describing dense matrices, sparse matrices and vectors.
 You'll need to use :
@@ -709,22 +661,21 @@ This translates into the search for a function $u$ satisfying the following syst
 Figures \ref{fig:res_square2d_M2} and \ref{fig:res_square2d_perforated} illustrate the numerical solutions obtained using this finite element method.
 These visualizations were produced with \textsc{ParaView} using the \textit{Rainbow Desaturated} color scheme.
 
-\begin{multicols}{2}
-  \begin{figure}[H]
-  \centering
-  \includegraphics[width=0.4\textwidth]{images/resultat_f1_nonperfo.png}
+\begin{figure}[htbp]
+\centering
+\begin{minipage}[t]{0.47\linewidth}
+\centering
+  \includegraphics[width=0.90\linewidth]{images/resultat_f1_nonperfo.png}
   \caption{square2d\_M2. msh}
   \label{fig:res_square2d_M2}
-  \end{figure}
-  \columnbreak
-  \begin{figure}[H]
-  \centering
-  \includegraphics[width=0.4\textwidth]{images/resultat_f1_perfo.png}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.47\linewidth}
+\centering
+  \includegraphics[width=0.90\linewidth]{images/resultat_f1_perfo.png}
   \caption{square2d\_perforated.msh}
   \label{fig:res_square2d_perforated}
-  \end{figure}
-  %\columnbreak
-\end{multicols}
+\end{minipage}
+\end{figure}
 
 
 % \subsubsection{Convergence}
@@ -758,8 +709,8 @@ All project development should take place in a GitHub repository. The following 
 \begin{itemize}
 \item Repository setup: Create a public or private GitHub repository for your project.
 \item Branching: Use branches for different features or parts of the project. The main branch should always contain stable and functional code.
-\item Commits and Pull Requests: Follow best practices for commit messages and use pull requests (PRs) to merge changes into the main branch. PRs should be peer-reviewed by other students.
-\item Collaborative Development: If working in teams, ensure that all members contribute to the repository using branches, commits, and PRs.
+\item Commits and Pull Requests: Follow best practices for commit messages and use pull requests (PRs) to merge changes into the main branch. For this individual project, PRs document self-review, test results and feedback from the instructors; peer review is not required.
+\item Individual Development: Each student maintains their own repository and must explain the changes, tests and decisions recorded in their issues and PRs.
 \end{itemize}
 
 \paragraph{2. Continuous Integration with GitHub Actions:}
@@ -782,18 +733,27 @@ To ensure reproducibility and ease of use, a Docker image should be generated au
 Ensure that the repository is well-documented:
 \begin{itemize}
 \item README: Provide a README.md file that explains how to clone the repository, install dependencies, run the project, and build the Docker image.
-\item Contribution Guidelines: Include guidelines for contributing to the project, especially if it is a team project.
+\item Development Guidelines: Document the individual development workflow, self-review checklist and how instructor feedback is tracked.
 \item Documentation for Code and Workflow: Clearly document the CI pipeline, testing strategy, and Docker setup. Consider adding links to relevant GitHub Actions, test reports, and Docker images.
 \end{itemize}
 
 This section integrates best practices from software engineering and DevOps, which are crucial for developing maintainable and reproducible scientific computing projects.
 
-\subsection{Grading}
+\subsection{Assessment update for the next cohort}
+
+The historical grading table and dates below are retained for review; they must not be interpreted as the confirmed schedule or grading for the next cohort.
+The proposed Project-course rubric is in \path{EVALUATION.adoc}. The teaching team must confirm it together with the C++ rubric and current deadlines before distributing the assignment.
+
+AI assistance must comply with the CSMI policy:
+\url{https://csmi.cemosis.fr/fr/csmi/ai-policy.html}.
+Practical disclosure instructions are in \path{AI-USAGE.adoc}; keep an incremental journal, disclose the affected code and documents, cite the tools, and validate all contributions independently.
+
+\subsection{Historical grading (to be confirmed)}
 
 The following table shows the grading distribution for the C++ for Scientific Computing and Project courses. 
 The C++ course will focus on the implementation of the scientific computing algorithms, while the Project course will evaluate the project management aspects, including version control, CI/CD, and Docker.
 
-\begin{table}[h!]
+\begin{table}[htbp]
     \centering
     \begin{tabular}{lcc}
     \toprule

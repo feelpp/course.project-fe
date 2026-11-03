@@ -1,0 +1,89 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{tex/csmi}[2026/11/03 CSMI project and report style]
+
+% Shared, pdfLaTeX-compatible typography and page design.
+\RequirePackage[T1]{fontenc}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[english]{babel}
+\RequirePackage{amsmath,amssymb}
+\RequirePackage{newtxtext,newtxmath}
+\RequirePackage[scaled=0.94]{sourcesans}
+\RequirePackage[scaled=0.92]{inconsolata}
+\RequirePackage{microtype}
+\RequirePackage[a4paper,margin=24mm,top=25mm,bottom=25mm,headheight=15pt,headsep=9mm]{geometry}
+\RequirePackage{xcolor,graphicx,booktabs,tabularx}
+\RequirePackage{titlesec,fancyhdr,enumitem,caption}
+\RequirePackage[many]{tcolorbox}
+\RequirePackage{hyperref}
+\RequirePackage{bookmark}
+\RequirePackage[section]{placeins}
+\definecolor{CSMINavy}{HTML}{173047}
+\definecolor{CSMITeal}{HTML}{007F82}
+\definecolor{CSMIInk}{HTML}{253746}
+\definecolor{CSMIMuted}{HTML}{596D7D}
+\definecolor{CSMILight}{HTML}{F0F6F7}
+\definecolor{CSMIRule}{HTML}{D8E4E8}
+\hypersetup{colorlinks=true,linkcolor=CSMINavy,urlcolor=CSMITeal,citecolor=CSMITeal,
+  pdfborder={0 0 0},pdfcreator={LaTeX / CSMI}}
+\pdfstringdefDisableCommands{\def\\{ }\def\enspace{ }\def\mathbb#1{#1}\def\Delta{Delta}}
+\urlstyle{same}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em plus 0.12em minus 0.08em}
+\linespread{1.055}
+\setlength{\emergencystretch}{1.5em}
+\raggedbottom
+\setlist{topsep=0.35em,itemsep=0.18em,parsep=0pt,leftmargin=1.6em}
+\setlist[itemize,1]{label=\textcolor{CSMITeal}{\small\textbullet}}
+\titleformat{\section}{\Large\sffamily\bfseries\color{CSMINavy}}
+  {\textcolor{CSMITeal}{\thesection}}{0.65em}{}
+\titleformat{\subsection}{\large\sffamily\bfseries\color{CSMINavy}}
+  {\thesubsection}{0.65em}{}
+\titleformat{\subsubsection}{\normalsize\sffamily\bfseries\color{CSMINavy}}
+  {\thesubsubsection}{0.65em}{}
+\titlespacing*{\section}{0pt}{1.6em}{0.55em}
+\titlespacing*{\subsection}{0pt}{1.05em}{0.35em}
+\titlespacing*{\subsubsection}{0pt}{0.8em}{0.2em}
+\captionsetup{font=small,labelfont={bf,sf,color=CSMITeal},labelsep=period,skip=7pt}
+\renewcommand{\arraystretch}{1.15}
+\setlength{\tabcolsep}{6pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\sffamily\bfseries\color{CSMINavy}CSMI}
+\fancyhead[R]{\small\sffamily\color{CSMIMuted}\CSMIshorttitle}
+\fancyfoot[L]{\footnotesize\sffamily\color{CSMIMuted}Scientific computing\enspace /\enspace Individual project}
+\fancyfoot[R]{\small\sffamily\bfseries\color{CSMITeal}\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+\newcommand{\CSMIshorttitle}{Finite element method}
+\newcommand{\CSMIdoctype}{PROJECT BRIEF}
+\newcommand{\CSMIsubtitle}{C++ for Scientific Computing\\Project Development and Management}
+\newcommand{\CSMIedition}{Semester project / 2026--2027}
+\newcommand{\CSMIcovernote}{An individual project connecting numerical methods, reliable software and reproducible results.}
+\newtcolorbox{csminote}[1][Reading guide]{enhanced,breakable,sharp corners,
+  boxrule=0pt,leftrule=2pt,colframe=CSMITeal,colback=CSMILight,
+  coltitle=CSMINavy,fonttitle=\sffamily\bfseries,title={#1},
+  attach title to upper={\par\smallskip},left=11pt,right=11pt,top=9pt,bottom=9pt,
+  before skip=0.9em,after skip=0.9em}
+\makeatletter
+\renewcommand{\maketitle}{%
+  \hypersetup{pdftitle={\@title},pdfauthor={\@author}}%
+  \begin{titlepage}\color{CSMIInk}\sffamily
+    {\large\bfseries\color{CSMINavy}MASTER CSMI}\hfill
+    {\small\color{CSMIMuted}UNIVERSITÉ DE STRASBOURG}\par
+    \vspace{0.55cm}{\color{CSMITeal}\hrule height 2pt}\vspace{2.0cm}
+    {\small\bfseries\color{CSMITeal}\CSMIdoctype\par}\vspace{0.6cm}
+    {\fontsize{32}{36}\selectfont\bfseries\color{CSMINavy}\@title\par}
+    \vspace{0.8cm}{\Large\color{CSMIMuted}\CSMIsubtitle\par}
+    \vspace{1.1cm}
+    \begin{csminote}[Scientific software, end to end]
+      \normalfont\CSMIcovernote
+    \end{csminote}
+    \vfill
+    {\color{CSMIRule}\hrule}\vspace{0.5cm}
+    {\normalsize\bfseries\color{CSMINavy}\@author\par}
+    \vspace{0.3cm}{\small\color{CSMIMuted}\CSMIedition\par}
+    \vspace{0.15cm}{\small\color{CSMIMuted}\@date\par}
+  \end{titlepage}
+  \setcounter{page}{1}
+}
+\makeatother

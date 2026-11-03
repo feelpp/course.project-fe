@@ -1,0 +1,46 @@
+= CSMI LaTeX Style
+
+The project brief and report use `tex/csmi.sty`: a cover page, NewTX text and mathematics, Source Sans headings, Inconsolata code, a navy and teal palette, hierarchical headings, captions, headers, and page numbers. The style works with pdfLaTeX; no system fonts, remote images, or shell escape are required.
+
+== Build
+
+From the repository root:
+
+[source,bash]
+----
+latexmk -pdf project.tex report.tex
+----
+
+The `.latexmkrc` configuration produces `output/pdf/project.pdf` and `output/pdf/report.pdf`. These generated files and visual checks under `tmp/` are ignored by Git. Source files are the reference deliverables; students must configure their CI to retain the PDFs as artifacts.
+
+The required packages are available in TeX Live: `newtx`, `sourcesans`, `inconsolata`, `microtype`, `geometry`, `titlesec`, `fancyhdr`, `enumitem`, `caption`, `tcolorbox`, `hyperref`, `bookmark`, and `placeins`, along with the scientific packages used in the project brief. A full TeX Live installation includes these packages. For a minimal installation, use your TeX distribution's package manager and verify that both documents compile.
+
+== Build and Preview in VSCode
+
+Open `report.tex` or `project.tex` and run *LaTeX Workshop: Build LaTeX project*. The repository settings use the `latexmk-pdf` recipe and set both the build output and PDF lookup directory to `output/pdf/`.
+
+Then run *LaTeX Workshop: View LaTeX PDF file*. If a preview tab opened before these settings were updated still points to a PDF at the repository root, close that tab and open the preview again from the corresponding `.tex` file. Reload the VSCode window if it has not picked up the workspace settings.
+
+== Customize the Report
+
+Edit `title`, `author`, and `date` in `report.tex`. This is an individual report. The following commands can be redefined in the preamble after loading the style:
+
+[source,latex]
+----
+\renewcommand{\CSMIdoctype}{PROJECT REPORT}
+\renewcommand{\CSMIshorttitle}{FEM / Project report}
+\renewcommand{\CSMIedition}{Semester project / 2026--2027}
+\renewcommand{\CSMIsubtitle}{C++ for Scientific Computing\\Project Development and Management}
+\renewcommand{\CSMIcovernote}{A short description of the work and its scope.}
+----
+
+Use a callout box for guidance or a reproducibility note:
+
+[source,latex]
+----
+\begin{csminote}[Reproducibility]
+Describe the input, commands, reference result and numerical tolerance.
+\end{csminote}
+----
+
+Keep the project brief and report in English, including custom headings, cover text, captions, and callout boxes.

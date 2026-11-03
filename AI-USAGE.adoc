@@ -1,0 +1,41 @@
+= Utilisation de l'IA et full disclosure
+:toc:
+
+== Référence et portée
+
+Ce document applique au projet les principes de la https://csmi.cemosis.fr/fr/csmi/ai-policy.html[politique d'utilisation de l'IA CSMI], version source du 7 septembre 2025, consultée le 3 novembre 2026.
+La politique de référence prévaut. Les précisions pratiques ci-dessous organisent la traçabilité dans le dépôt.
+
+L'assistance IA est permise pour ce projet : explication, exploration, suggestions de code, de tests, de configuration, de documentation et reformulation. Elle doit être déclarée, vérifiée et citée. Les étudiants restent auteurs et responsables du travail final, de ses résultats, de son originalité et des licences. La formulation finale, la structure et les affirmations scientifiques doivent être leur propre travail.
+Les modalités d'une vérification individuelle ou d'une autre épreuve sont annoncées séparément.
+
+== Ce qu'il faut déclarer
+
+Le full disclosure porte sur tous les livrables : C++, CMake, tests, workflows, Docker, scripts, rapport, bibliographie, figures et slides, y compris complétion inline, agents et réécriture linguistique.
+
+Pour chaque séance ou ensemble cohérent de suggestions, consigner dans link:AI-DISCLOSURE.adoc[le journal versionné] :
+
+* Date, étudiant concerné, outil et fournisseur, modèle/version affichés ; écrire « non communiqué » si indisponible, sans inventer une version.
+* Objectif et résumé du prompt ; fichiers, sections ou PR concernés.
+* Contributions proposées, parties acceptées ou adaptées, suggestions rejetées significatives et raison.
+* Vérifications indépendantes, corrections et preuves : test avec résultat de référence, documentation originale, calcul manuel, compilation, journal CI ou reproduction.
+
+Tenir le journal au fil du projet et le résumer dans le rapport et la présentation. Une PR concernée renvoie à l'entrée correspondante. Une séance de complétion peut être regroupée avec son périmètre et sa validation ; il n'est pas demandé de journaliser chaque touche.
+Déclarer explicitement l'absence d'usage si c'est le cas. Ne pas recopier une liste d'outils non utilisés ni attester des validations qui n'ont pas été réalisées.
+
+== Vérifier et citer
+
+. Lire le diff et comprendre chaque changement avant intégration.
+. Vérifier les commandes, chemins, effets et dépendances avant exécution.
+. Tester avec des résultats attendus obtenus indépendamment de l'IA : calcul analytique, petit cas vérifiable, documentation de référence ou solution connue.
+. Contrôler les équations, unités, conditions aux limites, tolérances, résultats et références. Une seconde réponse d'IA n'est pas une preuve indépendante.
+. Citer les sources scientifiques/techniques originales. Citer également les outils réellement utilisés comme logiciels, en précisant fournisseur, outil, modèle/version si connus, URL et date d'accès. Ne pas citer une sortie IA comme autorité scientifique.
+
+L'étudiant doit savoir expliquer, modifier, tester et défendre le contenu retenu. Un test proposé par une IA doit lui-même être vérifié ; un test qui reproduit la même erreur que le code ne suffit pas.
+
+== Confidentialité et intégrité
+
+Ne jamais transmettre à un service externe des secrets, clés, données personnelles/confidentielles, contenus sous embargo ou d'examen. Le journal conserve un résumé expurgé des échanges ; la divulgation n'impose pas de publier de données sensibles ni de conversations privées complètes.
+Ne pas fabriquer de résultats, références, preuves de tests ou journaux d'usage. Mentionner les sources et vérifier les conditions de réutilisation du code et des données.
+
+Pour les conséquences, corrections de bonne foi et recours, consulter directement la section « Application & Conséquences » de la politique CSMI. Ce document ne crée pas de sanctions supplémentaires.

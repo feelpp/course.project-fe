@@ -1,0 +1,57 @@
+= Évaluation du cours Projet — proposition 2026–2027
+:toc:
+
+IMPORTANT: Proposition à valider avec Vincent Chabannes avant diffusion. Elle concerne la note du cours Projet uniquement et ne modifie pas la note C++. Les poids et dates historiques de `project.tex` ne constituent pas les modalités confirmées de la nouvelle promotion.
+
+== Ce qui est évalué
+
+Le projet est strictement individuel : un dépôt, un rapport et une soutenance par étudiant. Les PR servent à documenter les changements et la validation, pas à organiser un travail en équipe.
+
+Transformer un code scientifique en un logiciel que quelqu'un d'autre peut compiler, tester, exécuter, comprendre et reprendre. Le sujet FEM sert de support commun aux deux cours.
+
+* C++ : algorithmes, structures de données, conception C++, correction et analyse scientifiques, selon la grille convenue avec Vincent.
+* Projet : construction du logiciel, automatisation, tests, suivi individuel du développement, documentation et reproductibilité.
+* Une même preuve peut servir aux deux cours ; son appréciation doit porter sur des compétences distinctes (par exemple valeur scientifique d'un test côté C++, automatisation et diagnostic côté Projet).
+
+== Barème proposé : 20 points
+
+[cols="3,1,6",options="header"]
+|===
+|Critère |Points |Preuves attendues
+|GitHub et organisation du travail individuel |3
+|Un dépôt par étudiant. Issues avec critères d'acceptation, branches et PR liées aux issues, auto-relecture documentée et décisions justifiées. Une PR représentative montre les tests et corrections effectués. Les enseignants peuvent commenter ; aucune collaboration ni revue entre pairs n'est exigée.
+|Construction avec CMake |3
+|Configuration hors sources, dépendances explicites, cibles et standard C++ annoncés, commandes documentées. Compilation depuis un clone propre sans chemins absolus propres à un étudiant ; tests intégrés à CTest.
+|Intégration continue |3
+|Compilation et tests sur push et PR, échec réellement bloquant, journaux lisibles, construction des documents et conservation des artefacts. Preuve d'une régression détectée puis corrigée. Aucune publication privilégiée sur une PR non approuvée.
+|Tests et validation automatisée |3
+|Tests avec résultats attendus indépendants et tolérances justifiées : lecture de maillage, quadrature, assemblage, conditions aux limites et exécution complète ; cas invalides et régression. La couverture soutient l'analyse, elle ne remplace pas la pertinence des tests.
+|Docker et reproductibilité |3
+|Image construite en CI, exécution réelle vérifiée, dépendances documentées, entrées/sorties accessibles, image de livraison liée au commit ou tag. L'étudiant reproduit un cas depuis un clone propre et consigne le résultat ; les enseignants doivent pouvoir refaire cette exécution à partir du README.
+|Documentation et rapport technique |3
+|README exploitable, architecture et choix expliqués, commandes exactes, références vérifiées, limites, stratégie de tests et de CI. Sources LaTeX et PDF du rapport et des slides. Historique de développement et déclaration de l'assistance IA traçables.
+|Démonstration et maîtrise individuelle |2
+|Chaque étudiant explique une modification, configure/compile/teste, lit une erreur de CI, retrouve une preuve et justifie une décision technique. Une courte modification ou un diagnostic en direct peut être demandé dans les conditions annoncées par les enseignants.
+|===
+
+Le rapport fournit les preuves des critères précédents : il n'est pas une seconde occasion de noter les mêmes fonctionnalités. La soutenance vérifie notamment la compréhension individuelle.
+
+Pour chaque critère : 0 = absent ou non démontrable ; environ la moitié des points = partiellement fonctionnel ou reproduction nécessitant de l'aide ; totalité = fonctionnel, expliqué et reproduit avec les preuves demandées. Les situations intermédiaires sont appréciées sur les mêmes preuves.
+La quantité de commits, de lignes de code, de prompts ou de workflows ne constitue pas une mesure de qualité. Les extensions (matrice GCC/Clang, analyse statique, sanitizers, couverture, image multi-stage) renforcent les critères correspondants sans rendre ces outils obligatoires ni dépasser 20.
+
+== Jalons et livrables
+
+Les dates calendaires et modalités de retard sont annoncées par les enseignants avant le lancement. Proposition de progression :
+
+. *V0 — cadrage* : reformulation, plan de travail individuel, issues et jalons, déclaration initiale des outils IA ; vérifier les accès de l'étudiant et des enseignants.
+. *V1 — première chaîne complète* : un exemple compile avec CMake, un test significatif est exécuté en CI, une PR inclut une auto-relecture, une première image est construite et exécutée.
+. *V2 — validation* : fonctionnalités scientifiques intégrées, tests de régression, cas reproduit depuis un clone propre et compte rendu de validation individuel.
+. *V3 — livraison* : tag et SHA, CI verte sur cette révision, image identifiée, PDF rapport/slides, journal IA et historique de développement finalisés, démonstration individuelle.
+
+Le dépôt livré contient : sources, petits jeux de données et leur provenance, CMake, tests, workflows, Dockerfile, README, rapport/slides et leurs sources, journal IA et compte rendu de reproduction individuel. Fournir les liens vers les PR, exécutions de CI, artefacts et image correspondant à la livraison.
+Une capture d'écran ou un badge vert seul ne prouve pas la reproductibilité.
+
+== IA et intégrité
+
+Voir link:AI-USAGE.adoc[les consignes IA]. L'usage déclaré d'une IA n'apporte ni bonus ni malus en soi. La qualité, la vérification, l'attribution et la maîtrise restent évaluées ; aucun abonnement payant n'est nécessaire.
+Une déclaration imprécise faite de bonne foi doit pouvoir être corrigée conformément à la politique CSMI. Une suspicion de non-divulgation suit cette politique, avec justification et possibilité de réponse ; aucun zéro automatique n'est ajouté à cette grille.

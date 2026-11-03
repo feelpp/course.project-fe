@@ -19,3 +19,10 @@ report.toc
 node_modules/
 cache/
 public/
+# LaTeX build output and local visual checks
+/output/
+/tmp/
+*.listing
+*.synctex.gz
+
+

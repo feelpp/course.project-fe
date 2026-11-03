@@ -1,0 +1,26 @@
+= Déclaration d'assistance IA et journal
+
+Document à remplir progressivement par les étudiants. Les champs ci-dessous sont des consignes et ne constituent pas une déclaration d'usage déjà effectuée.
+
+== Déclaration individuelle
+
+* Étudiant : À RENSEIGNER.
+* Révision / tag livré : À RENSEIGNER.
+* Situation : À RENSEIGNER — aucun usage, ou assistance utilisée avec périmètre résumé.
+* Outils réellement utilisés et citations logicielles : À RENSEIGNER (ou sans objet).
+* Travail personnel, assistance reçue et vérifications : À RENSEIGNER.
+
+== Journal — entrée à dupliquer
+
+* Date et auteur : À RENSEIGNER.
+* Outil / fournisseur : À RENSEIGNER.
+* Modèle / version : À RENSEIGNER (ou « non communiqué »).
+* But et résumé du prompt, sans donnée sensible : À RENSEIGNER.
+* Fichiers / sections / PR : À RENSEIGNER.
+* Suggestions retenues, adaptées ou rejetées : À RENSEIGNER.
+* Validation indépendante, résultats et liens vers les preuves : À RENSEIGNER.
+* Corrections humaines et limites restantes : À RENSEIGNER.
+
+== Mention dans le rapport et les slides
+
+Résumer les usages réels, citer les logiciels et leur date d'accès, renvoyer à ce journal au tag de livraison et expliquer les contrôles réalisés. Si aucun outil n'a été utilisé, le déclarer explicitement.
